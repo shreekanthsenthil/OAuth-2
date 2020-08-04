@@ -49,6 +49,7 @@ app.get('/',mustBeLoggedIn, (req, res) => {
     res.render('welcome', {name: req.user.displayName})
 })
 
+//GOOGLE
 app.get('/oauth/google',
   passport.authenticate('google', { scope: ['profile','email'] }));
 
@@ -57,6 +58,13 @@ app.get('/google/callback',
   function(req, res) {
     res.redirect('/');
   });
+
+//FACEBOOK
+app.get('/oauth/facebook', passport.authenticate('facebook'))
+
+app.get('/facebook/callback',passport.authenticate('facebook', {failureRedirect: '/login'}), function(req, res) {
+    res.redirect('/')
+})
 
 app.post('/logout', (req, res) => {
     req.session = null;
