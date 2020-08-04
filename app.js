@@ -49,7 +49,7 @@ app.get('/',mustBeLoggedIn, (req, res) => {
     res.render('welcome', {name: req.user.displayName})
 })
 
-app.get('/google',
+app.get('/oauth/google',
   passport.authenticate('google', { scope: ['profile','email'] }));
 
 app.get('/google/callback', 
